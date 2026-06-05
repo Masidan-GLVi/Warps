@@ -317,7 +317,7 @@ picosxcent, picos = graftudo(it, cutout)
 grafajuste(it, picosxcent, picos)
 
 #depois de alinhar a galáxia o máximo possível, faz o cálculo do warp
-warpsesq, warpsdir = ajustewarp(picosx, picos, valorcentro)
+warpsesq, warpsdir = ajustewarp(picosx, picos)
 
 
 print(f'Ajuste de grau 1 |, ({warpsesq[0]:.2f}, {warpsdir[0]:.2f})')
