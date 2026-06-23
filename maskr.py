@@ -46,7 +46,7 @@ def processardados(dados):
 
 	for l in range(len(dadosajuste)):
 		fittado = fitter(model, eixox, dadosajuste[l])
-		if fittado.amplitude.value > 0.5*10**(-1):
+		if fittado.amplitude.value > (3.4e-2):
 			picos.append(fittado.mean.value)
 			picosx.append(l)
 	picos = np.array(picos) - fitter(model, eixox, dadosajuste[centro]).mean.value
@@ -80,10 +80,10 @@ def graftudo(iteracao, dados):
 	for l in range(len(dadosajuste)):
 		fittado = fitter(model, eixox, dadosajuste[l])#realiza um ajuste gaussiano de cada coluna da imagem original
 		fitcenter = fitter(model, eixox, dadosajuste[centro]).mean.value #faz o valor de y do ponto central, para ajustar depois
-		if fittado.amplitude.value > 0.5*10**(-1): #impede valores essencialmente nulos
+		if fittado.amplitude.value > (3.4e-2): #impede valores essencialmente nulos (<5 sigma do fundo nesse caso)
 			picos.append(fittado.mean.value-fitcenter) #armazena cada pico (amplitude) da gaussiana
 			picosx.append(l)
-			deltay.plot(-eixox-1, fittado(eixox), color=cores(range(altura), centro)[l], linewidth=0.3) #-eixox porque o FITS inverte o eixo y ao ser lido nos dados, logo como a matriz é transposta, precisamos inverter o eixo x na exibição (e dá para ver que fica "correto" nas gaussianas)
+			deltay.plot(eixox+1, fittado(eixox), color=cores(range(altura), centro)[l], linewidth=0.3) #+eixox+1 para centralizar o pico central no 0
 
 	mapa = copy.copy(plt.get_cmap('inferno'))
 	mapa.set_under(color='white')
