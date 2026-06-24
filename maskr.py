@@ -83,7 +83,7 @@ def graftudo(iteracao, dados):
 		if fittado.amplitude.value > (3.4e-2): #impede valores essencialmente nulos (<5 sigma do fundo nesse caso)
 			picos.append(fittado.mean.value-fitcenter) #armazena cada pico (amplitude) da gaussiana
 			picosx.append(l)
-			deltay.plot(eixox+1, fittado(eixox), color=cores(range(altura), centro)[l], linewidth=0.3) #+eixox+1 para centralizar o pico central no 0
+			deltay.plot(eixox+fitcenter, fittado(eixox), color=cores(range(altura), centro)[l], linewidth=0.3) #+eixox+fitcenter para centralizar o pico central no 0
 
 	mapa = copy.copy(plt.get_cmap('inferno'))
 	mapa.set_under(color='white')
